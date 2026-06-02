@@ -723,15 +723,40 @@ html, body {
     .pillars-grid { grid-template-columns: 1fr 1fr; }
     .q-buttons { flex-direction: column; align-items: center; }
     .scene-text { font-size: 1.1rem; }
+    
     .soil-layer { font-size: 0.7rem; }
-    .s1 { width: 280px; } .s2 { width: 240px; } .s3 { width: 200px; } .s4 { width: 160px; }
-    .render-layout { flex-direction: column; }
-    .photo-frame { width: 220px; }
+    .s1 { width: 90%; max-width: 280px; } 
+    .s2 { width: 80%; max-width: 240px; } 
+    .s3 { width: 70%; max-width: 200px; } 
+    .s4 { width: 60%; max-width: 160px; }
+    
+    .render-layout { flex-direction: column; gap: 20px; }
+    .photo-frame { width: 70%; max-width: 240px; margin: 0 auto; }
     .love-phrases { text-align: center; }
-    .phrase { border-left: none; border-bottom: 2px solid var(--pink); font-size: 1.1rem; }
+    .phrase { border-left: none; border-bottom: 1px solid rgba(255, 45, 117, 0.4); font-size: 1.1rem; padding: 10px; }
+    .phrase:hover { transform: translateY(-3px); border-bottom-color: #fff; }
+    
+    .question-panel { padding: 35px 20px; }
+    .terminal-body { padding: 15px; font-size: 0.85rem; min-height: 220px; }
+    .btn-next { padding: 12px 30px; font-size: 0.9rem; }
 }
+
 @media (max-width: 480px) {
-    .pillars-grid { grid-template-columns: 1fr; }
+    .scene-title { font-size: 1.4rem; letter-spacing: 2px; }
     .the-question { font-size: 1.6rem; }
-    .scene-title { font-size: 1.5rem; }
+    .q-header { font-size: 1rem; }
+    .scene-text { font-size: 1rem; line-height: 1.8; }
+    
+    .pillars-grid { grid-template-columns: 1fr; gap: 15px; }
+    .materials-grid { gap: 15px; }
+    .material-item { min-width: 100px; padding: 15px 10px; }
+    .mat-icon { font-size: 2rem; }
+    
+    .interior-icons { gap: 20px; }
+    .int-icon { font-size: 2.2rem; }
+    
+    .progress-label { font-size: 0.55rem; }
+    .p-dot { width: 8px; height: 8px; }
+    
+    .cyber-btn { padding: 12px 25px; font-size: 0.95rem; width: 100%; max-width: 250px; }
 }
