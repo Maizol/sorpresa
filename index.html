@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto T.E.R.N.U.R.I.T.A. — Clasificación: LEYENDA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+    <!-- Canvas de Partículas -->
+    <canvas id="particles-canvas"></canvas>
+    <!-- HUD Grid -->
+    <div class="hud-grid"></div>
+
+    <!-- Barra de progreso global -->
+    <div class="progress-global" id="progress-global">
+        <div class="progress-dots" id="progress-dots"></div>
+        <span class="progress-label" id="progress-label">FASE 0 / 9</span>
+    </div>
+
+    <!-- AUDIO DE FONDO -->
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 0: BOOT SEQUENCE (Terminal)           -->
+    <!-- ============================================ -->
+    <div class="scene active" id="scene-boot">
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="terminal-title">TERNURITA_OS v2.0</span>
+            </div>
+            <div class="terminal-body">
+                <p id="term-output"></p>
+                <div class="bar-container"><div class="bar-fill" id="boot-progress"></div></div>
+            </div>
+        </div>
+        <button class="btn-next" id="btn-boot" style="opacity:0; pointer-events:none;">[ INICIAR SECUENCIA DE CONSTRUCCIÓN ]</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 1: BLUEPRINT SVG                      -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-blueprint">
+        <div class="anim-el blueprint-frame">
+            <svg viewBox="0 0 200 160" class="blueprint-svg" id="house-svg">
+                <line class="draw-line" x1="20" y1="140" x2="180" y2="140"/>
+                <line class="draw-line" x1="40" y1="140" x2="40" y2="70"/>
+                <line class="draw-line" x1="160" y1="140" x2="160" y2="70"/>
+                <line class="draw-line" x1="30" y1="70" x2="100" y2="20"/>
+                <line class="draw-line" x1="100" y1="20" x2="170" y2="70"/>
+                <line class="draw-line" x1="30" y1="70" x2="170" y2="70"/>
+                <rect class="draw-line" x="80" y="100" width="25" height="40"/>
+                <rect class="draw-line" x="50" y="85" width="20" height="20"/>
+                <rect class="draw-line" x="130" y="85" width="20" height="20"/>
+                <path class="draw-line heart-line" d="M95,45 C95,38 85,33 85,40 C85,48 95,53 95,53 C95,53 105,48 105,40 C105,33 95,38 95,45Z"/>
+            </svg>
+            <p class="bp-label anim-el">PLANO ESTRUCTURAL — PROYECTO HOGAR ETERNO</p>
+        </div>
+        <button class="btn-next anim-el" id="btn-bp">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 2: ESTUDIO TOPOGRÁFICO                -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-topo">
+        <div class="scene-content">
+            <div class="stamp">01</div>
+            <h2 class="scene-title anim-el">ESTUDIO TOPOGRÁFICO</h2>
+            <div class="separator anim-el"></div>
+            <p class="scene-text anim-el">Todo gran proyecto comienza con el estudio del terreno.<br><br>Desde el momento en que nuestras coordenadas de vida se cruzaron, el terreno de mi corazón fue reestructurado por completo.<br><br>En medio de un mundo de caos, encontré el <span class="hl-pink">lugar perfecto</span> para edificar algo inmenso.</p>
+            <div class="topo-animation anim-el">
+                <div class="topo-ring r1"></div>
+                <div class="topo-ring r2"></div>
+                <div class="topo-ring r3"></div>
+                <div class="topo-pin">📍</div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-topo">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 3: ANÁLISIS DE SUELOS                 -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-suelos">
+        <div class="scene-content">
+            <div class="stamp">02</div>
+            <h2 class="scene-title anim-el">ANÁLISIS DE SUELOS</h2>
+            <div class="separator anim-el"></div>
+            <p class="scene-text anim-el">Antes de construir, un arquitecto analiza la composición del suelo.<br><br>El nuestro resultó ser el más fértil de todos: hecho de <span class="hl-cyan">complicidad</span>, <span class="hl-pink">risas compartidas</span> y esos silencios cómodos que solo dos almas conectadas pueden entender.<br><br>Resultado del análisis: <span class="hl-cyan">APTO PARA CONSTRUIR ALGO ETERNO</span>.</p>
+            <div class="soil-layers anim-el">
+                <div class="soil-layer s1"><span>COMPLICIDAD</span></div>
+                <div class="soil-layer s2"><span>RISAS</span></div>
+                <div class="soil-layer s3"><span>CONFIANZA</span></div>
+                <div class="soil-layer s4"><span>AMOR</span></div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-suelos">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 4: LOS CIMIENTOS                      -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-cimientos">
+        <div class="scene-content">
+            <div class="stamp">03</div>
+            <h2 class="scene-title anim-el">LOS CIMIENTOS</h2>
+            <div class="separator anim-el"></div>
+            <p class="scene-text anim-el">Antes de levantar muros, se necesitan cimientos sólidos.<br><br>Nuestra base es la <span class="hl-cyan">confianza</span>, el <span class="hl-pink">respeto</span> y esas risas que nos salen del alma cuando estamos juntos.<br><br>No hay terremoto que pueda con nosotros.</p>
+            <div class="cimientos-anim anim-el">
+                <div class="block b1"></div>
+                <div class="block b2"></div>
+                <div class="block b3"></div>
+                <div class="block b4"></div>
+                <div class="block b5"></div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-cimientos">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 5: PILARES ESTRUCTURALES              -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-pilares">
+        <div class="scene-content wide">
+            <div class="stamp">04</div>
+            <h2 class="scene-title anim-el">PILARES ESTRUCTURALES</h2>
+            <div class="separator anim-el"></div>
+            <p class="scene-text center-text anim-el">Los pilares que sostienen todo lo que siento por ti.</p>
+            <div class="pillars-grid">
+                <div class="pillar-card anim-el">
+                    <div class="pillar-icon">🛡️</div>
+                    <h3>RESISTENCIA</h3>
+                    <p>Soporte inquebrantable ante cualquier carga que la vida nos ponga.</p>
+                </div>
+                <div class="pillar-card anim-el">
+                    <div class="pillar-icon">☀️</div>
+                    <h3>ILUMINACIÓN</h3>
+                    <p>Tu sonrisa, mi fuente de energía renovable e infinita.</p>
+                </div>
+                <div class="pillar-card anim-el">
+                    <div class="pillar-icon">🎵</div>
+                    <h3>ACÚSTICA</h3>
+                    <p>Nuestras charlas, el sonido más hermoso que existe.</p>
+                </div>
+                <div class="pillar-card anim-el">
+                    <div class="pillar-icon">💎</div>
+                    <h3>ESTÉTICA</h3>
+                    <p>Tu belleza, la fachada más perfecta jamás diseñada.</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-pilares">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 6: MATERIALES NOBLES                  -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-materiales">
+        <div class="scene-content">
+            <div class="stamp">05</div>
+            <h2 class="scene-title anim-el">MATERIALES NOBLES</h2>
+            <div class="separator anim-el"></div>
+            <p class="scene-text anim-el">En la mejor arquitectura, se usan solo <span class="hl-cyan">materiales nobles</span>: piedra, madera, cristal.<br><br>Tú estás hecha de los materiales más valiosos que existen: <span class="hl-pink">ternura</span> que desarma cualquier muro, <span class="hl-cyan">inteligencia</span> que diseña soluciones donde otros ven problemas, y una <span class="hl-pink">calidez</span> que convierte cualquier espacio en un hogar.</p>
+            <div class="materials-grid anim-el">
+                <div class="material-item"><span class="mat-icon">🪨</span><span>FORTALEZA</span></div>
+                <div class="material-item"><span class="mat-icon">🪵</span><span>CALIDEZ</span></div>
+                <div class="material-item"><span class="mat-icon">💠</span><span>TRANSPARENCIA</span></div>
+                <div class="material-item"><span class="mat-icon">✨</span><span>BRILLO PROPIO</span></div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-materiales">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 7: LA FACHADA                         -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-fachada">
+        <div class="scene-content">
+            <div class="stamp">06</div>
+            <h2 class="scene-title anim-el">LA FACHADA</h2>
+            <div class="separator anim-el"></div>
+            <p class="scene-text anim-el">En arquitectura, la fachada es lo primero que el mundo ve.<br><br>Pero tú eres diferente: tu belleza exterior es solo el reflejo de algo mucho más profundo e infinito.<br><br>Eres la obra maestra que cualquier arquitecto soñaría con diseñar, pero que <span class="hl-pink">solo la vida pudo crear</span>.</p>
+            <div class="facade-hearts anim-el">
+                <span class="float-heart" style="--d:2s;--x:-60px">♡</span>
+                <span class="float-heart" style="--d:3s;--x:40px">♡</span>
+                <span class="float-heart" style="--d:2.5s;--x:-20px">♡</span>
+                <span class="float-heart" style="--d:3.5s;--x:70px">♡</span>
+                <span class="float-heart" style="--d:1.8s;--x:0px">♡</span>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-fachada">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 8: DISEÑO INTERIOR                    -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-interior">
+        <div class="scene-content">
+            <div class="stamp">07</div>
+            <h2 class="scene-title anim-el">DISEÑO INTERIOR</h2>
+            <div class="separator pink anim-el"></div>
+            <p class="scene-text anim-el">La arquitectura no es solo estructura, es también el <span class="hl-pink">espacio que habitas</span>.<br><br>Y el espacio que tú creas a tu alrededor está lleno de luz, de esa paz que solo se siente cuando estás con la persona correcta.<br><br>Cada rincón de mi vida que has tocado se ha convertido en mi <span class="hl-cyan">lugar favorito</span>.</p>
+            <div class="interior-icons anim-el">
+                <div class="int-icon">🏠<span>HOGAR</span></div>
+                <div class="int-icon">💡<span>LUZ</span></div>
+                <div class="int-icon">🔥<span>CALIDEZ</span></div>
+                <div class="int-icon">🌿<span>VIDA</span></div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-interior">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 9: NUESTRO RENDER (Foto + Frases)     -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-render">
+        <div class="scene-content wide">
+            <div class="stamp">08</div>
+            <h2 class="scene-title anim-el">NUESTRO RENDER</h2>
+            <div class="separator pink anim-el"></div>
+            <div class="render-layout anim-el">
+                <div class="photo-frame">
+                    <img src="nosotros.jpg" alt="Nosotros" class="our-photo">
+                    <div class="photo-glow"></div>
+                </div>
+                <div class="love-phrases">
+                    <p class="phrase p1">"Contigo descubrí que el hogar no es un lugar, eres tú."</p>
+                    <p class="phrase p2">"Eres mi plano favorito: perfecto en cada detalle."</p>
+                    <p class="phrase p3">"Tu risa es el sonido que quiero escuchar toda la vida."</p>
+                    <p class="phrase p4">"Me haces sentir que todo va a estar bien."</p>
+                    <p class="phrase p5">"Eres mi persona segura, mi calma, mi ternurita."</p>
+                </div>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-render">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 10: EL PRIMER SELLO (El Beso)         -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-beso">
+        <div class="scene-content">
+            <div class="stamp">09</div>
+            <h2 class="scene-title anim-el">EL PRIMER SELLO</h2>
+            <div class="separator pink anim-el"></div>
+            <p class="scene-text anim-el">En arquitectura, un proyecto se sella con una firma.<br><br>Pero nosotros sellamos el nuestro de una forma mucho más bonita... <span class="hl-pink">con un beso</span>.<br><br>Ese beso de hoy fue como poner la primera piedra de algo que va a durar para siempre. Fue tierno, fue real, fue <span class="hl-cyan">nuestro</span>.<br><br>Y desde ese momento supe que no quiero construir nada en esta vida si no es <span class="hl-pink">contigo al lado</span>.</p>
+            <div class="kiss-anim anim-el">
+                <span class="kiss-emoji">💋</span>
+                <span class="sparkle s1">✨</span>
+                <span class="sparkle s2">✨</span>
+                <span class="sparkle s3">💖</span>
+            </div>
+        </div>
+        <button class="btn-next anim-el" id="btn-beso">CONTINUAR ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 11: ENTREGA DE LLAVES                 -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-llaves">
+        <div class="scene-content">
+            <div class="stamp">10</div>
+            <h2 class="scene-title anim-el">ENTREGA DE LLAVES</h2>
+            <div class="separator pink anim-el"></div>
+            <p class="scene-text anim-el">Los planos están listos.<br>Los materiales fueron seleccionados con todo mi amor.<br>El terreno está preparado y los cimientos son inquebrantables.<br><br>Pero un proyecto de esta magnitud no puede ser construido por un solo arquitecto...<br><br><span class="hl-pink">Necesita una socia fundadora.</span></p>
+            <div class="key-anim anim-el">🔑</div>
+        </div>
+        <button class="btn-next anim-el" id="btn-llaves">VER SOLICITUD FINAL ▸</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 10: LA PREGUNTA FINAL                 -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-question">
+        <div class="question-panel anim-el">
+            <div class="hud-corner tl"></div>
+            <div class="hud-corner tr"></div>
+            <div class="hud-corner bl"></div>
+            <div class="hud-corner br"></div>
+
+            <h2 class="q-header anim-el">SOLICITUD DE PERMISO DE CONSTRUCCIÓN ETERNA</h2>
+            <div class="separator pink anim-el"></div>
+            <p class="q-sub anim-el">Considerando todos los planos presentados, la viabilidad del terreno, el cálculo estructural milimétrico de mi corazón, y cada uno de los momentos que hemos compartido...</p>
+
+            <h1 class="the-question anim-el" id="the-q">¿Quieres ser mi Ternurita Bella Hermosa (Novia) :3?</h1>
+
+            <div class="q-buttons anim-el">
+                <button class="cyber-btn yes" id="btn-yes">
+                    <span>SÍ, AUTORIZAR PROYECTO</span>
+                </button>
+                <button class="cyber-btn no" id="btn-no">
+                    <span id="no-text">DENEGAR</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ESCENA 11: FINAL (ÉXITO)                     -->
+    <!-- ============================================ -->
+    <div class="scene" id="scene-final">
+        <div class="final-content">
+            <h1 class="final-title anim-el">PERMISO APROBADO</h1>
+            <p class="final-sub anim-el">Iniciando protocolo de amor eterno...</p>
+            <div class="big-heart anim-el">❤️</div>
+            <p class="final-msg anim-el">Te amo, mi ternurita bella hermosa :3</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
